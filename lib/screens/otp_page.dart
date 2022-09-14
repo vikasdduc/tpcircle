@@ -11,6 +11,7 @@ class OtpPage extends StatefulWidget {
 OtpFieldController otpController = OtpFieldController();
 
 class OtpPageState  extends State<OtpPage>{
+  var dataType = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,6 +36,7 @@ class OtpPageState  extends State<OtpPage>{
           child: const Icon(Icons.add,size: 30,color: Colors.black,),
         ),
 
+
         resizeToAvoidBottomInset : false,
         body: Container(
           color: Colors.white,
@@ -57,10 +59,11 @@ class OtpPageState  extends State<OtpPage>{
                     outlineBorderRadius: 15,
                     style: const TextStyle(fontSize: 17),
                     onChanged: (pin) {
-                      print("Changed: $pin");
+                      dataType=pin;
+                      print("Changed" + dataType);
                     },
                     onCompleted: (pin) {
-                      print("Completed: $pin");
+                      print("Completed_: $pin");
                     }),
                 ),
 
@@ -81,7 +84,16 @@ class OtpPageState  extends State<OtpPage>{
                               padding: const EdgeInsets.all(20) //content padding inside button
                           ),
                           onPressed: (){
-
+                            if(dataType.isEmpty){
+                              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                  content: Text("{Your data is not valid}")));
+                            }else if(dataType.length > 4){
+                              Navigator.pushNamed(context, 'myOrderPage');
+                            }else if(dataType.length < 4){
+                              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                  content: Text("{Fill full valid}")));
+                              Navigator.pushNamed(context, 'myOrderPage');
+                            }
                           },
                           child: const Text("Next"),
                         )

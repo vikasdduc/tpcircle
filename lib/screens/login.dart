@@ -35,6 +35,7 @@ class LoginPageState extends State<LoginPage>{
                 Container(
                   padding: const EdgeInsets.all(10),
                   child: TextFormField(
+                    maxLength: 10,
                     controller: mobileController,
                     decoration: InputDecoration(
                         border: const OutlineInputBorder(
@@ -78,32 +79,20 @@ class LoginPageState extends State<LoginPage>{
                                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                                       content: Text("{Mobile Number Can't be empty}"),
                                     ));
-//
-                                    if (mobileController.text.length < 10){
-                                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                                        content: Text("{Enter 10 digit Phone Number}"),
-                                      ));
-
-                                      if (mobileController.text.length < 10 ){
-                                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                                          content: Text("{Enter 10 digit Phone Number}"),
+                                  } else if (mobileController.text.length < 10) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        const SnackBar(
+                                          content: Text(
+                                              "{Enter 10 digit Phone Number}"),
                                         ));
-
-                                        if (mobileController.text.length > 10 ){
-                                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                                            content: Text("{Enter 10 digit Phone Number}"),
-                                          ));
-
-                                          if (mobileController.text.length == 10){
-                                            Navigator.pushNamed(context, 'otpPageview');
-                                          }
-
-                                        }
-
-
-                                      }
-
-                                    }
+                                  } else if (mobileController.text.length > 10) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        const SnackBar(
+                                          content: Text(
+                                              "{Enter Less Than 10 digit Phone Number}"),
+                                        ));
+                                  } else if (mobileController.text.length == 10){
+                                    Navigator.pushNamed(context, 'otpPageview');
                                   }
 
                                 };

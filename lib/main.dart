@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tyreplex/screens/login.dart';
+import 'package:tyreplex/screens/my_order.dart';
 import 'package:tyreplex/screens/otp_page.dart';
 
 void main() {
@@ -24,14 +25,16 @@ class _MyAppState extends State<MyApp> {
 
     return
       MaterialApp(
+        debugShowCheckedModeBanner: false,
         initialRoute:   '/',
         routes: {
           '/':  (context) => const LoginPage(),
           'otpPageview':  (context) => const OtpPage(),
+          'myOrderPage' : (context) => const MyOrdersPage(),
         }, //creating routes
-        title: 'Flutter Demo',
+        title: 'Log in page',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.red,
         ),
 
       );
