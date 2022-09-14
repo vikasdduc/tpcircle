@@ -78,7 +78,7 @@ class LoginPageState extends State<LoginPage>{
                                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                                       content: Text("{Mobile Number Can't be empty}"),
                                     ));
-
+//
                                     if (mobileController.text.length < 10){
                                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                                         content: Text("{Enter 10 digit Phone Number}"),
