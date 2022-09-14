@@ -60,7 +60,7 @@ class LoginPageState extends State<LoginPage>{
                   child: Center(
                       child: SizedBox(
                           height:60, //height of button
-                          width:300, //width of button
+                          // width:300, //width of button
                           child:ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                   primary: Colors.lightBlue, //background color of button
