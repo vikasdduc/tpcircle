@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tyreplex/screens/login.dart';
+//import 'package:tyreplex/screens/login.dart';
 import 'package:tyreplex/screens/my_order.dart';
 import 'package:tyreplex/screens/otp_page.dart';
 
@@ -28,7 +28,8 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         initialRoute:   '/',
         routes: {
-          '/':  (context) => const LoginPage(),
+          '/':  (context) => const MyOrdersPage(),
+          //LoginPage(),
           'otpPageview':  (context) => const OtpPage(),
           'myOrderPage' : (context) => const MyOrdersPage(),
         }, //creating routes
