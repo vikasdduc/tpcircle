@@ -72,10 +72,10 @@ class OtpPageState  extends State<OtpPage>{
                   child: Center(
                     child: SizedBox(
                         height:60, //height of button
-                        width:300, //width of button
+                        width:350, //width of button
                         child:ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              primary: Colors.lightBlue, //background color of button
+                              primary: Theme.of(context).primaryColor, //background color of button
                               side: const BorderSide(width: 2, color:Colors.black), //border width and color
                               elevation: 3, //elevation of button
                               shape: RoundedRectangleBorder( //to set border radius to button

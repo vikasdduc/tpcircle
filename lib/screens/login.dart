@@ -31,7 +31,15 @@ class LoginPageState extends State<LoginPage>{
               children: [
                 const SizedBox(height: 5,),
                 Image.asset('assets/tyre.png'),
+                Column(
+                 mainAxisAlignment: MainAxisAlignment.start,
+                  children: const [
+                      Text('Enter 10 digit mobile number', style: TextStyle(fontSize: 15,color: Colors.black),),
+                      SizedBox(height: 10,),
+                     Text('An OTP will be sent to this mobile number', style: TextStyle(fontSize: 14,color: Colors.black38),),
 
+                         ],
+                        ),
                 Container(
                   padding: const EdgeInsets.all(10),
                   child: TextFormField(
@@ -41,7 +49,7 @@ class LoginPageState extends State<LoginPage>{
                         border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
-                        labelText: 'Enter Your Phone Number',
+                        labelText: 'Mobile Number',
 
                       suffixIcon: IconButton(
                         icon: const Icon( Icons.phone, ),
@@ -60,17 +68,18 @@ class LoginPageState extends State<LoginPage>{
                   margin: const EdgeInsets.only(top: 20),
                   child: Center(
                       child: SizedBox(
+                        width: 350,
                           height:60, //height of button
                           // width:300, //width of button
                           child:ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                  primary: Colors.lightBlue, //background color of button
-                                  side: const BorderSide(width: 2, color:Colors.black), //border width and color
+                                  primary: Theme.of(context).primaryColor, //background color of button
+                                  side: const BorderSide(width: 2,), //border width and color
                                   elevation: 3, //elevation of button
                                   shape: RoundedRectangleBorder( //to set border radius to button
                                       borderRadius: BorderRadius.circular(30)
                                   ),
-                                  padding: const EdgeInsets.all(20) //content padding inside button
+                                  padding: const EdgeInsets.all(5) //content padding inside button
                               ),
                               onPressed: (){
                                 //
@@ -103,6 +112,7 @@ class LoginPageState extends State<LoginPage>{
 
                   ),
                 ),
+                const SizedBox(height: 30,),
 
 
 
