@@ -53,7 +53,7 @@ Widget searchableUsersWidget() {
         return Container(
           margin: const EdgeInsets.only(top: 10),
           decoration: BoxDecoration(
-            color: Theme.of(context).primaryColor,
+            color: Colors.white,
             borderRadius:  const BorderRadius.only(
                 topLeft: Radius.circular(20),
                 topRight: Radius.circular(20)),

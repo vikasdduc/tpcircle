@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "545779318153",
+    "project_id": "tyreplex-demo",
+    "storage_bucket": "tyreplex-demo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:545779318153:android:5ee041c75ce19b03c9f558",
+        "android_client_info": {
+          "package_name": "com.example.tyreplex"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "545779318153-vk05f5klr9v1mm4hrtpaaops5taaa562.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBO6N56HY0tl28MOeO5qgmCwaZmhEtnKY8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "545779318153-vk05f5klr9v1mm4hrtpaaops5taaa562.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -16,7 +16,7 @@ class MyOrdersPageState extends State<MyOrdersPage >{
   bool showElevatedButtonBadge = true;
   int _selectedScreenIndex = 0;
   final List _orderScreens = [
-    {"screen":  const TestScreenA(), },
+    {"screen":  TestScreenA(), },
     {"screen":  TestScreenB(), },
     {"screen":  TestScreenC(), }
   ];
@@ -228,10 +228,11 @@ class MyOrdersPageState extends State<MyOrdersPage >{
                       contentPadding: const EdgeInsets.fromLTRB(20, 5, 0, 5),
                       leading: const Icon(Icons.shopping_cart_outlined,size: 25,),
                       onTap: () {
-                        Navigator.of(context).pop();
+                        Navigator.pushNamed(context, '/myFilterPage');
                         // Navigator.of(context).push(MaterialPageRoute(
                         //     builder: (BuildContext context) => HomeScreen()));
                       },
+
                     ),
                     ListTile(
                       title: const Text('Orders History',

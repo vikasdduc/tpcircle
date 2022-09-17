@@ -1,18 +1,23 @@
+
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:tyreplex/screens/filterPages/filter_screen.dart';
+//import 'package:tyreplex/screens/filterPages/filter_screen.dart';
 //import 'package:tyreplex/screens/login.dart';
 
-//import 'package:tyreplex/screens/myOrderPages/my_order.dart';
+import 'package:tyreplex/screens/myOrderPages/my_order.dart';
 //import 'package:tyreplex/screens/otp_page.dart';
 
-void main() {
-  runApp( MyApp(title: 'Demo app ',));
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+await Firebase.initializeApp();
+  runApp( const MyApp(title: 'Tp Demo',));
 }
 
 
 
 class MyApp extends StatefulWidget {
-  MyApp({Key? key, required this.title}) : super(key: key);
+  const MyApp({Key? key, required this.title}) : super(key: key);
   final String title;
 
   @override
@@ -30,12 +35,12 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         initialRoute:   '/',
         routes: {
-          '/':  (context) => const FilterPage(),
-          //MyOrdersPage(),
+          '/':  (context) => const MyOrdersPage(),
+          '/myFilterPage' : (context) => const FilterPage(),
+
           //FilterPage(),
-          // LoginPage(),
-          //'otpPageview':  (context) => const OtpPage(),
-          //'myOrderPage' : (context) => const MyOrdersPage(),
+          // 'otpPageview':  (context) => const OtpPage(),
+          // 'myOrderPage' : (context) => const MyOrdersPage(),
         }, //creating routes
         title: 'Log in page',
         theme: ThemeData(

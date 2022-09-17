@@ -51,7 +51,7 @@ class OtpPageState  extends State<OtpPage>{
                   padding: const EdgeInsets.all(10),
                   child: OTPTextField(
                     controller: otpController,
-                    length: 5,
+                    length: 6,
                     width: MediaQuery.of(context).size.width,
                     textFieldAlignment: MainAxisAlignment.spaceAround,
                     fieldWidth: 45,
