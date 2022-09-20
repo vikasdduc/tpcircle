@@ -1,9 +1,12 @@
 import 'package:badges/badges.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 //import 'package:tyreplex/screens/filterPages/filter_screen.dart';
 import 'package:tyreplex/screens/myOrderPages/test_Screen_B.dart';
 import 'package:tyreplex/screens/myOrderPages/test_screen_A.dart';
 import 'package:tyreplex/screens/myOrderPages/test_screen_C.dart';
+
+import '../login.dart';
 
 class MyOrdersPage extends StatefulWidget{
   const MyOrdersPage({Key? key}) : super(key: key);
@@ -205,6 +208,30 @@ class MyOrdersPageState extends State<MyOrdersPage >{
             Expanded(
                 child: ListView(
                   children: [
+                    ListTile(
+                      title: const Text('log out',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 15,
+                          )),
+                      contentPadding: const EdgeInsets.fromLTRB(20, 0, 0, 5),
+                      leading: const Icon(Icons.logout,size: 25,),
+                      onTap: () async {
+                        await FirebaseAuth.instance.signOut();
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => LoginScreen(),
+                          ),
+                        );
+                      },
+
+
+                        //Navigator.of(context).pop();
+                        // Navigator.of(context).push(MaterialPageRoute(
+                        //     builder: (BuildContext context) => HomeScreen()));
+
+                    ),
                     ListTile(
                       title: const Text('Customer Orders',
                           style: TextStyle(
