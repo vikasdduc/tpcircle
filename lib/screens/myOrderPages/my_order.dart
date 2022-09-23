@@ -6,7 +6,7 @@ import 'package:tyreplex/screens/myOrderPages/test_Screen_B.dart';
 import 'package:tyreplex/screens/myOrderPages/test_screen_A.dart';
 import 'package:tyreplex/screens/myOrderPages/test_screen_C.dart';
 
-import '../login.dart';
+//import '../login.dart';
 
 class MyOrdersPage extends StatefulWidget{
   const MyOrdersPage({Key? key}) : super(key: key);
@@ -31,6 +31,7 @@ class MyOrdersPageState extends State<MyOrdersPage >{
   }
   @override
   Widget build(BuildContext context) {
+    Colors.white;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
@@ -218,12 +219,12 @@ class MyOrdersPageState extends State<MyOrdersPage >{
                       leading: const Icon(Icons.logout,size: 25,),
                       onTap: () async {
                         await FirebaseAuth.instance.signOut();
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => LoginScreen(),
-                          ),
-                        );
+                        // Navigator.pushReplacement(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => LoginScreen(),
+                        //   ),
+                        // );
                       },
 
 
