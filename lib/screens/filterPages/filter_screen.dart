@@ -41,6 +41,9 @@ Widget searchableUsersWidget() {
     {'name': 'James', 'tel': '9010'},
     {'name': 'Michael', 'tel': '9011'},
     {'name': 'Jane', 'tel': '9013'},
+    {'name': 'Vinit', 'tel': '9014'},
+    {'name': 'Harry', 'tel': '9015'},
+    {'name': 'Tony', 'tel': '9016'},
 
   ];
   ValueNotifier<List<Map>> filtered = ValueNotifier<List<Map>>([]);

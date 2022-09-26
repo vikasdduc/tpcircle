@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:tyreplex/screens/filterPages/chip_filter_page.dart';
+import 'package:tyreplex/screens/filterPages/filter_screen.dart';
 import 'package:tyreplex/screens/myOrderPages/my_order.dart';
 import 'package:tyreplex/screens/rest_api_example/api_home_page.dart';
 
@@ -176,12 +178,12 @@ Future<void> main() async {
     onDidReceiveBackgroundNotificationResponse: notificationTapBackground,
   );
 
-  runApp(messagingApp());
+  runApp(MessagingApp());
 }
 
 /// Entry point for the example application.
-class messagingApp extends StatelessWidget {
-  const messagingApp({Key? key}) : super(key: key);
+class MessagingApp extends StatelessWidget {
+  const MessagingApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -190,13 +192,16 @@ class messagingApp extends StatelessWidget {
       title: 'TyrePlex',
       //theme: ThemeData.light(),
         theme: ThemeData(
+          scaffoldBackgroundColor: Colors.lightGreenAccent[100],
           primarySwatch: Colors.red,
          ),
       initialRoute: '/',
       routes: {
-        '/': (context) => Application(),
-        '/apipage': (context) => HomeForApi(payload: '',),
-        //'/message': (context) => MessageView(),
+        '/': (context) => const MyOrdersPage(),
+        //'/': (context) => const Application(),
+        '/myFilterPage':(context) => const FilterPage(),
+        '/apipage': (context) => const HomeForApi(payload: '',),
+        '/chipPage': (context) => FilterChipPage(),
       },
     );
   }
@@ -223,6 +228,8 @@ String constructFCMPayload(String? token) {
 
 /// Renders the example application.
 class Application extends StatefulWidget {
+  const Application({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => _Application();
 }
@@ -337,169 +344,7 @@ class _Application extends State<Application> {
   @override
   Widget build(BuildContext context) {
      return const MyOrdersPage();
-     //Scaffold(
-    //   appBar: AppBar(
-    //     title: const Text('Cloud Messaging'),
-    //     actions: <Widget>[
-    //       IconButton(
-    //           iconSize: 30,
-    //           color: Colors.red,
-    //           onPressed: (){
-    //             Navigator.pushNamed(context, '/apipage');
-    //           },
-    //           icon: const Icon(Icons.navigate_next,)
-    //       ),
-    //       // PopupMenuButton(
-    //       //   onSelected: onActionSelected,
-    //       //   itemBuilder: (BuildContext context) {
-    //       //     return [
-    //       //       const PopupMenuItem(
-    //       //         value: 'subscribe',
-    //       //         child: Text('Subscribe to topic'),
-    //       //       ),
-    //       //       const PopupMenuItem(
-    //       //         value: 'unsubscribe',
-    //       //         child: Text('Unsubscribe to topic'),
-    //       //       ),
-    //       //       const PopupMenuItem(
-    //       //         value: 'get_apns_token',
-    //       //         child: Text('Get APNs token (Apple only)'),
-    //       //       ),
-    //       //     ];
-    //       //   },
-    //       // ),
-    //     ],
-    //   ),
-    //   floatingActionButton: Builder(
-    //     builder: (context) => FloatingActionButton(
-    //       onPressed: sendPushMessage,
-    //       backgroundColor: Colors.white,
-    //       child: const Icon(Icons.send),
-    //     ),
-    //   ),
-    //   body: SingleChildScrollView(
-    //     child: Column(
-    //       children: [
-    //         //MetaCard('Permissions', Permissions()),
-    //         // MetaCard(
-    //         //   'FCM Token',
-    //         //   TokenMonitor((token) {
-    //         //     _token = token;
-    //         //     return token == null
-    //         //         ? const CircularProgressIndicator()
-    //         //         : Text(token, style: const TextStyle(fontSize: 12));
-    //         //   }),
-    //         // ),
-    //         // ElevatedButton(
-    //         //   onPressed: () {
-    //         //     FirebaseMessaging.instance
-    //         //         .getInitialMessage()
-    //         //         .then((RemoteMessage? message) {
-    //         //       if (message != null) {
-    //         //         Navigator.pushNamed(
-    //         //           context,
-    //         //           '/message',
-    //         //          // arguments: MessageArguments(message, true),
-    //         //         );
-    //         //       }
-    //         //     });
-    //         //   },
-    //         //   child: const Text('getInitialMessage()'),
-    //         // ),
-    //         //MetaCard('Message Stream', MessageList()
-    //         // ),
-    //       ],
-    //     ),
-    //   ),
-    // );
+
   }
 }
 
-/// UI Widget for displaying metadata.
-// class MetaCard extends StatelessWidget {
-//   final String _title;
-//   final Widget _children;
-//
-//   // ignore: public_member_api_docs
-//   MetaCard(this._title, this._children);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       width: double.infinity,
-//       margin: const EdgeInsets.only(left: 8, right: 8, top: 8),
-//       child: Card(
-//         child: Padding(
-//           padding: const EdgeInsets.all(16),
-//           child: Column(
-//             children: [
-//               Container(
-//                 margin: const EdgeInsets.only(bottom: 16),
-//                 child: Text(_title, style: const TextStyle(fontSize: 18)),
-//               ),
-//               _children,
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-
-
-
-
-// import 'package:firebase_core/firebase_core.dart';
-// import 'package:flutter/material.dart';
-// import 'package:tyreplex/screens/login.dart';
-// //import 'package:tyreplex/screens/filterPages/filter_screen.dart';
-// //import 'package:tyreplex/screens/login.dart';
-// //import 'package:tyreplex/screens/filterPages/filter_screen.dart';
-//
-// //import 'package:tyreplex/screens/myOrderPages/my_order.dart';
-// //import 'package:tyreplex/screens/otp_page.dart';
-//
-// void main() async{
-//   WidgetsFlutterBinding.ensureInitialized();
-// await Firebase.initializeApp();
-//   runApp( const MyApp(title: 'Tp Demo',));
-// }
-//
-//
-//
-// class MyApp extends StatefulWidget {
-//   const MyApp({Key? key, required this.title}) : super(key: key);
-//   final String title;
-//
-//   @override
-//   State<MyApp> createState() => _MyAppState();
-//
-// }
-//
-// class _MyAppState extends State<MyApp> {
-//
-//   @override
-//   Widget build(BuildContext context) {
-//
-//     return
-//       MaterialApp(
-//         debugShowCheckedModeBanner: false,
-//         home:const LoginScreen() ,
-//         // initialRoute:   '/',
-//         // routes: {
-//         //   '/':  (context) => const LoginPage(),
-//         //   '/myFilterPage' : (context) => const FilterPage(),
-//         //
-//         //   //FilterPage(),
-//         //   'otpPageview':  (context) => const OtpPage(),
-//         //   'myOrderPage' : (context) => const MyOrdersPage(),
-//         // }, //creating routes
-//         title: 'Log in page',
-//         theme: ThemeData(
-//           primarySwatch: Colors.red,
-//         ),
-//
-//       );
-//   }
-// }

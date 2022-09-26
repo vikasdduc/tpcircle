@@ -11,7 +11,9 @@ class TestScreenA extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 572,
+      height: 573,
+      //height: MediaQuery.of(context).size.height,
+     // myHeight :  = height * 0.65,
       child: ListView.builder(
           itemCount: 2,
           itemBuilder: (BuildContext context, int index) {
