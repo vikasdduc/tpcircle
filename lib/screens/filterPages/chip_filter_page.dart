@@ -9,17 +9,17 @@ class FilterChipPage extends StatefulWidget {
 }
 
 class _FilterChipPageState extends State<FilterChipPage> {
-  int _selectedIndex = 0;
+  // int _selectedIndex = 0;
   int _selectedCategoryIndex = -1;
-  String _selectedUserType = "Maid";
+  String _selectedUserType = "Car";
   PageController pageController = PageController();
-  List vehicleList = ["Maid", "Driver", "Engineer", "Gardener", "Pilot"];
+  List vehicleList = ["Car", "Bike", "Scooter", "Truck", "Truck/Bus"];
   List data = [
     {
       "name": "Sachin Rajput",
       "profilePic":
       "https://lh3.googleusercontent.com/a-/AAuE7mCfQn-gP_FJZUUU4GC4aSU1km9t_e5PL6zsV-NwdA=k-s48",
-      "category": ["Maid", "Engineer"],
+      "category": ["Car", "Scooter"],
       "rating": 5,
       "bg": Colors.red
     },
@@ -27,19 +27,27 @@ class _FilterChipPageState extends State<FilterChipPage> {
       "name": "Sachin Tendulkar",
       "profilePic":
       "https://lh3.googleusercontent.com/a-/AAuE7mCfQn-gP_FJZUUU4GC4aSU1km9t_e5PL6zsV-NwdA=k-s48",
-      "category": ["Gardener", "Pilot", "Engineer"],
-      "rating": 5,
+      "category": ["Truck", "Bike", "Scooter"],
+      "rating": 2,
       "bg": Colors.amberAccent
-    }
+    },
+    {
+      "name": "Mahipal pandit",
+      "profilePic":
+      "https://lh3.googleusercontent.com/a-/AAuE7mCfQn-gP_FJZUUU4GC4aSU1km9t_e5PL6zsV-NwdA=k-s48",
+      "category": ["Bike", "Scooter","Truck"],
+      "rating": 3,
+      "bg": Colors.pinkAccent
+    },
   ];
   List filteredData = [];
 
-  void onTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-    pageController.jumpToPage(index);
-  }
+  // void onTapped(int index) {
+  //   setState(() {
+  //     _selectedIndex = index;
+  //   });
+  //   pageController.jumpToPage(index);
+  // }
 
   void tappedCategory(int index) {
     _selectedCategoryIndex = index;
@@ -87,17 +95,22 @@ class _FilterChipPageState extends State<FilterChipPage> {
                     }).toList(),
               ),
             ),
-            Expanded(
+            SizedBox(
+              height: 100,
               child: ListView.builder(
-                scrollDirection: Axis.horizontal,
+                scrollDirection: Axis.vertical,
                 itemCount: filteredData.length,
                 itemBuilder: (context, index) {
+
                   var item = filteredData[index];
-                  return Container(
-                    width: 180.0,
-                    color: item['bg'],
-                    child: Center(
-                      child: Text(item["name"].toString()),
+                  return Card(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                           Text(item["name"].toString()
+                           ),
+                        Text(item["rating"].toString()),
+                      ],
                     ),
                   );
                 },

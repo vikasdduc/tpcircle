@@ -98,7 +98,7 @@
 //               //     shape: RoundedRectangleBorder( //to set border radius to button
 //               //         borderRadius: BorderRadius.circular(30)
 //               //     ),
-//               //     padding: const EdgeInsets.all(5) //content padding inside button
+  //               //     padding: const EdgeInsets.all(5) //content padding inside button
 //               // ),
 //
 //               onPressed: () {
