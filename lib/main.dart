@@ -34,8 +34,8 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 }
 
 
-final BehaviorSubject<String?> selectNotificationSubject =
-BehaviorSubject<String?>();
+final selectNotificationSubject =
+BehaviorSubject<int?>();
 
 /// Create a [AndroidNotificationChannel] for heads up notifications
 late AndroidNotificationChannel channel;
@@ -95,7 +95,7 @@ void showFlutterNotification(RemoteMessage message) {
           actions: <AndroidNotificationAction>[
             AndroidNotificationAction(
               //  selectedNotificationPayload!,  navigationActionId!;
-              navigationActionId!, 'Accept',
+              channel.id, 'Accept',
               titleColor: Color.fromARGB(255, 0, 0, 255),
             ),
 
@@ -162,18 +162,18 @@ Future<void> main() async {
     onDidReceiveNotificationResponse:
         (NotificationResponse notificationResponse) {
 
-      selectNotificationSubject.add(notificationResponse.payload);
+      selectNotificationSubject.add(1);
 
-      switch (notificationResponse.notificationResponseType) {
-        case NotificationResponseType.selectedNotification:
-          selectNotificationSubject.add(notificationResponse.payload);
-          break;
-        case NotificationResponseType.selectedNotificationAction:
-          if (notificationResponse.actionId == navigationActionId) {
-            selectNotificationSubject.add(notificationResponse.payload);
-          }
-          break;
-      }
+      // switch (notificationResponse.notificationResponseType) {
+      //   case NotificationResponseType.selectedNotification:
+      //     selectNotificationSubject.add(notificationResponse.payload);
+      //     break;
+      //   case NotificationResponseType.selectedNotificationAction:
+      //     if (notificationResponse.actionId == navigationActionId) {
+      //       selectNotificationSubject.add(notificationResponse.payload);
+      //     }
+      //     break;
+      // }
     },
     onDidReceiveBackgroundNotificationResponse: notificationTapBackground,
   );
@@ -258,7 +258,7 @@ class _Application extends State<Application> {
   void _configureSelectNotificationSubject() {
     print("nsdjfndjfn djf scsdsdfsfvvvvvvvvvvvvvvvvvvvvvvvvvsfj");
 
-    try{ selectNotificationSubject.stream.listen((String? payload) async {
+    try{ selectNotificationSubject.stream.listen((int? i) async {
 
 
       print("nsdjfndjfn djf j");
