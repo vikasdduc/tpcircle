@@ -1,4 +1,3 @@
-
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -10,22 +9,17 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:tyreplex/screens/filterPages/chip_filter_page.dart';
-import 'package:tyreplex/screens/filterPages/filter_screen.dart';
+import 'package:tyreplex/screens/dynamicLink/dynamic_link_service.dart';
 import 'package:tyreplex/screens/myOrderPages/my_order.dart';
 import 'package:tyreplex/screens/rest_api_example/api_home_page.dart';
 
+// import 'filterPageForLink.dart';
 
 
-
-
-///
-/// To verify that your messages are being received, you ought to see a firebase_notification appearon your device/emulator via the flutter_local_notifications plugin.
-/// Define a top-level named handler which background/terminated messages will
 /// call. Be sure to annotate the handler with `@pragma('vm:entry-point')` above the function declaration.
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  await Firebase.initializeApp();
+  // await Firebase.initializeApp();
   await setupFlutterNotifications();
   // showFlutterNotification(message);
   // If you're going to use other Firebase services in the background, such as Firestore,
@@ -52,7 +46,6 @@ Future<void> setupFlutterNotifications() async {
     description:
     'This channel is used for important notifications.', // description
     importance: Importance.high,
-    enableVibration: true,
   );
 
   flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
@@ -89,18 +82,20 @@ void showFlutterNotification(RemoteMessage message) {
           channel.id,
           channel.name,
           channelDescription: channel.description,
-          // TODO add a proper drawable resource to android, for now using vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-          //      one that already exists in example app.
+          // TODO add a proper drawable resource to android, for now using vvvvvvvvvvvvvvvvvvvvvvvv
+          //
           icon: 'launch_background',
           actions: <AndroidNotificationAction>[
             AndroidNotificationAction(
               //  selectedNotificationPayload!,  navigationActionId!;
-              channel.id, 'Accept',
+              navigationActionId!, 'Accept',
+              showsUserInterface: true,
+              cancelNotification: false,
               titleColor: Color.fromARGB(255, 0, 0, 255),
             ),
 
 
-            AndroidNotificationAction(channel.id, 'Reject'),
+            AndroidNotificationAction(channel.id, 'Reject',),
             //  AndroidNotificationAction('id_3', 'Action 3'),
           ],
         ),
@@ -133,7 +128,7 @@ Future<void> main() async {
   await Firebase.initializeApp();
   // Set the background messaging handler early on, as a named top-level function
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  String? token = await FirebaseMessaging.instance.getToken();// getting fcm token
+  String? token = await FirebaseMessaging.instance.getToken();
   print("token_start ${token} token_end");
   if (!kIsWeb) {
     await setupFlutterNotifications();
@@ -164,7 +159,7 @@ Future<void> main() async {
 
       selectNotificationSubject.add(1);
 
-      // switch (notificationResponse.notificationResponseType) {
+      //     switch (notificationResponse.notificationResponseType) {
       //   case NotificationResponseType.selectedNotification:
       //     selectNotificationSubject.add(notificationResponse.payload);
       //     break;
@@ -189,19 +184,16 @@ class MessagingApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'TyrePlex',
-      //theme: ThemeData.light(),
-        theme: ThemeData(
-          scaffoldBackgroundColor: Colors.lightGreenAccent[100],
-          primarySwatch: Colors.red,
-         ),
+      title: 'Tyreplex demo',
+      theme: ThemeData.dark(),
       initialRoute: '/',
       routes: {
-        '/': (context) => const MyOrdersPage(),
-        //'/': (context) => const Application(),
-        '/myFilterPage':(context) => const FilterPage(),
-        '/apipage': (context) => const HomeForApi(payload: '',),
-        '/chipPage': (context) => FilterChipPage(),
+        '/': (context) => Application(),
+        '/apipage': (context) => HomeForApi(payload: '',),
+        '/dynamicpage':(context) => DynamicPage(),
+        '/MyOrdersPage' : (context) => MyOrdersPage(),
+
+        //'/message': (context) => MessageView(),
       },
     );
   }
@@ -228,8 +220,7 @@ String constructFCMPayload(String? token) {
 
 /// Renders the example application.
 class Application extends StatefulWidget {
-  const Application({Key? key}) : super(key: key);
-
+  // late final LinkPage page; // have to call the page and uncommennt
   @override
   State<StatefulWidget> createState() => _Application();
 }
@@ -258,15 +249,22 @@ class _Application extends State<Application> {
   void _configureSelectNotificationSubject() {
     print("nsdjfndjfn djf scsdsdfsfvvvvvvvvvvvvvvvvvvvvvvvvvsfj");
 
-    try{ selectNotificationSubject.stream.listen((int? i) async {
-
-
+    selectNotificationSubject.stream.listen((int? i)async{
       print("nsdjfndjfn djf j");
       await  Navigator.of(context).push(MaterialPageRoute<void>(
         builder: (BuildContext context) => HomeForApi(payload: 'payload',),
       ));
     });
-    }catch(err){print("i am giving error because $err");}
+    //
+    // try{ selectNotificationSubject.stream.listen((String? payload) async {
+    //
+    //
+    //   print("nsdjfndjfn djf j");
+    //   // await  Navigator.of(context).push(MaterialPageRoute<void>(
+    //   //    builder: (BuildContext context) => HomeForApi(payload: 'payload',),
+    //   //  ));
+    //  });
+    // }catch(err){print("i am giving error because $err");}
   }
 
 
@@ -288,7 +286,7 @@ class _Application extends State<Application> {
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
-        body: constructFCMPayload(_token),
+        // body: constructFCMPayload(_token),
       );
       print('FCM request for device sent!');
     } catch (e) {
@@ -343,8 +341,89 @@ class _Application extends State<Application> {
 
   @override
   Widget build(BuildContext context) {
-     return const MyOrdersPage();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Cloud Messaging'),
+        actions: <Widget>[
+          IconButton(
+              iconSize: 30,
+              color: Colors.red,
+              onPressed: (){
+                Navigator.pushNamed(context, '/dynamicpage');
+              },
+              icon: const Icon(Icons.navigate_next,)
+          ),
+          IconButton(
+              iconSize: 30,
+              color: Colors.red,
+              onPressed: (){
 
+              },
+              icon: const Icon(Icons.share,)
+          ),
+          // PopupMenuButton(
+          //   onSelected: onActionSelected,
+          //   itemBuilder: (BuildContext context) {
+          //     return [
+          //       const PopupMenuItem(
+          //         value: 'subscribe',
+          //         child: Text('Subscribe to topic'),
+          //       ),
+          //       const PopupMenuItem(
+          //         value: 'unsubscribe',
+          //         child: Text('Unsubscribe to topic'),
+          //       ),
+          //       const PopupMenuItem(
+          //         value: 'get_apns_token',
+          //         child: Text('Get APNs token (Apple only)'),
+          //       ),
+          //     ];
+          //   },
+          // ),
+        ],
+      ),
+      floatingActionButton: Builder(
+        builder: (context) => FloatingActionButton(
+          onPressed: sendPushMessage,
+          backgroundColor: Colors.white,
+          child: const Icon(Icons.send),
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            //MetaCard('Permissions', Permissions()),
+            // MetaCard(
+            //   'FCM Token',
+            //   TokenMonitor((token) {
+            //     _token = token;
+            //     return token == null
+            //         ? const CircularProgressIndicator()
+            //         : Text(token, style: const TextStyle(fontSize: 12));
+            //   }),
+            // ),
+            // ElevatedButton(
+            //   onPressed: () {
+            //     FirebaseMessaging.instance
+            //         .getInitialMessage()
+            //         .then((RemoteMessage? message) {
+            //       if (message != null) {
+            //         Navigator.pushNamed(
+            //           context,
+            //           '/message',
+            //          // arguments: MessageArguments(message, true),
+            //         );
+            //       }
+            //     });
+            //   },
+            //   child: const Text('getInitialMessage()'),
+            // ),
+            //MetaCard('Message Stream', MessageList()
+            // ),
+          ],
+        ),
+      ),
+    );
   }
 }
 
