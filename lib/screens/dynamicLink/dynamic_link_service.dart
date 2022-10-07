@@ -49,6 +49,11 @@ class _MainScreenState extends State<_MainScreen> {
   Future<void> initDynamicLinks() async {
     dynamicLinks.onLink.listen((dynamicLinkData) {
       final Uri uri = dynamicLinkData.link;
+      print("dynamicLinkData.link-start  ");
+
+      print( dynamicLinkData.link);
+      print(" dynamicLinkData.link-end");
+
       final queryParams = uri.queryParameters;
       if (queryParams.isNotEmpty) {
         String? productId = queryParams["id"];
@@ -74,7 +79,8 @@ class _MainScreenState extends State<_MainScreen> {
     final DynamicLinkParameters parameters = DynamicLinkParameters(
       uriPrefix: kUriPrefix,
       link: Uri.parse(kUriPrefix + link),
-      androidParameters: const AndroidParameters(
+      androidParameters:  AndroidParameters(
+        fallbackUrl: Uri(path:"https://www.tyreplex.com"),
         packageName: 'com.example.tyreplex',
         minimumVersion: 0,
       ),
@@ -119,7 +125,7 @@ class _MainScreenState extends State<_MainScreen> {
                     ),
                     ElevatedButton(
                       onPressed: !_isCreatingLink
-                          ? () => _createDynamicLink(true, kSiteLink)
+                          ? () => _createDynamicLink(true, kHomepageLink)
                           : null,
                       child: const Text('Get Short Link '),
                     ),

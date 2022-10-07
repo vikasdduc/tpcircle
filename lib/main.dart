@@ -159,16 +159,7 @@ Future<void> main() async {
 
       selectNotificationSubject.add(1);
 
-      //     switch (notificationResponse.notificationResponseType) {
-      //   case NotificationResponseType.selectedNotification:
-      //     selectNotificationSubject.add(notificationResponse.payload);
-      //     break;
-      //   case NotificationResponseType.selectedNotificationAction:
-      //     if (notificationResponse.actionId == navigationActionId) {
-      //       selectNotificationSubject.add(notificationResponse.payload);
-      //     }
-      //     break;
-      // }
+
     },
     onDidReceiveBackgroundNotificationResponse: notificationTapBackground,
   );
