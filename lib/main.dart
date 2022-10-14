@@ -9,7 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:tyreplex/screens/dynamicLink/dynamic_link_service.dart';
+import 'package:tyreplex/screens/dynamicLink/Link_URl_Launcher.dart';
+//import 'package:tyreplex/screens/dynamicLink/dynamic_link_service.dart';
+import 'package:tyreplex/screens/dynamicLink/url_launcher_tyreplex.dart';
 import 'package:tyreplex/screens/myOrderPages/my_order.dart';
 import 'package:tyreplex/screens/rest_api_example/api_home_page.dart';
 
@@ -82,7 +84,6 @@ void showFlutterNotification(RemoteMessage message) {
           channel.id,
           channel.name,
           channelDescription: channel.description,
-          // TODO add a proper drawable resource to android, for now using vvvvvvvvvvvvvvvvvvvvvvvv
           //
           icon: 'launch_background',
           actions: <AndroidNotificationAction>[
@@ -180,9 +181,12 @@ class MessagingApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => Application(),
-        '/apipage': (context) => HomeForApi(payload: '',),
-        '/dynamicpage':(context) => DynamicPage(),
-        '/MyOrdersPage' : (context) => MyOrdersPage(),
+        '/apipage': (context) => const HomeForApi(payload: '',),
+        //'/DynamicLinkScreen':(context) => const DynamicLinkScreen(),
+        '/urllauncher':(context) => const UrlLauncher(),
+        '/MyOrdersPage' : (context) => const MyOrdersPage(),
+        '/Youtubepage' : (context) => YoutubeUrlPage(),
+
 
         //'/message': (context) => MessageView(),
       },
@@ -340,7 +344,7 @@ class _Application extends State<Application> {
               iconSize: 30,
               color: Colors.red,
               onPressed: (){
-                Navigator.pushNamed(context, '/dynamicpage');
+                Navigator.pushNamed(context, '/urllauncher');
               },
               icon: const Icon(Icons.navigate_next,)
           ),
@@ -348,9 +352,17 @@ class _Application extends State<Application> {
               iconSize: 30,
               color: Colors.red,
               onPressed: (){
-
+                Navigator.pushNamed(context, '/Youtubepage');
               },
-              icon: const Icon(Icons.share,)
+              icon: const Icon(Icons.youtube_searched_for,)
+          ),
+          IconButton(
+              iconSize: 30,
+              color: Colors.red,
+              onPressed: (){
+                Navigator.pushNamed(context, '/DynamicLinkScreen');
+              },
+              icon: const Icon(Icons.link,)
           ),
           // PopupMenuButton(
           //   onSelected: onActionSelected,
